@@ -730,6 +730,8 @@ def find_autotest_dir(submission_name, autotest_subdir=['autotest','dryrun'], te
         names.append(os.path.join(m.group(1), m.group(2)))
         if m.group(1) in ['tut', 'lab']:
             names.append(os.path.join('tlb', m.group(2)))
+    if '.' in submission_name:
+        names.append(re.sub(r'\..*', '', submission_name))
     for dir in ['.',  os.path.join(d, 'activities'), d, os.path.join(d, '*'), os.path.join(d, '*', '*')]:
         for name in names:
             for sub_dir in autotest_subdir:
