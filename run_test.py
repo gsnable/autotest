@@ -1,9 +1,9 @@
-#!/usr/bin/env python3.5
+#!/usr/bin/python3
 
 import codecs, locale, os, re, shlex, subprocess, time
-from cse.subprocess_with_resource_limits import run
-from cse.explain_output_differences import explain_output_differences, sanitize_string
-from  termcolor import colored as termcolor_colored
+from subprocess_with_resource_limits import run
+from explain_output_differences import explain_output_differences, sanitize_string
+from termcolor import colored as termcolor_colored
 
 class InternalError(Exception):
 	pass
@@ -221,7 +221,7 @@ class Test():
 					 errors = colored(errors, 'red')
 				if 'Error too much output' in self.stderr:
 					errors += "Your program produced these %d lines of output before it was terminated:\n" % (len(self.stdout))
-					errors += colored(sanitize_string(self.stdout, max_lines_shown=16, max_line_length_shown=256, colorize=True), 'yellow')
+					errors += colored(sanitize_string(self.stdout, max_lines_shown=16, max_line_length_shown=256, colorize=colorize), 'yellow')
 				if self.stdout_ok and self.expected_stdout:
 					self.long_explanation = "Your program's output was correct but errors occurred:\n"
 					self.long_explanation += errors

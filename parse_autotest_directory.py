@@ -1,7 +1,7 @@
-#!/usr/bin/env python3.5
+#!/usr/bin/python3
 
 import codecs, collections, os, re, shlex, subprocess, sys
-from cse.run_test import Test
+from run_test import Test
 
 
 # test line format
@@ -274,7 +274,7 @@ def interpolate_backquotes(value):
 
 
 import asyncio, glob, shutil, signal
-from cse.subprocess_with_resource_limits import run
+from subprocess_with_resource_limits import run
 
 # generate expected output for tests
 if __name__ == '__main__':
@@ -292,7 +292,7 @@ if __name__ == '__main__':
 			unlink_files.append('samperr' + test.label)
 			if test.parameters.get('pre_compile_command', ''):
 				print('pre_compile_command:', test.parameters['pre_compile_command'], file=sys.stderr)
-				subprocess.run(test.parameters['pre_compile_command'], shell=test.parameters.get('pre_compile_command', False))
+				subprocess.run(test.parameters['pre_compile_command'], shell=test.parameters.get('pre_compile_command_shell', False))
 			if test.parameters.get('setup_command', ''):
 				print('setup_command:', test.parameters['setup_command'], file=sys.stderr)
 				subprocess.run(test.parameters['setup_command'], shell=test.parameters.get('setup_command_shell', False))
@@ -340,7 +340,7 @@ if __name__ == '__main__':
 			if test.stderr:
 				with open(expected_stderr_file, 'w')	as f:
 					f.write(test.stderr)
-					print('Warning creating', expected_stderr_file, 'with contents:\n', test.stderr, file=sys.stderr)
+					print('Warning creating', expected_stderr_file, 'with contents:', "'"+test.stderr.rstrip()+"'", file=sys.stderr)
 			else:
 				unlink_files.append(expected_stderr_file)
 			for expected_file in test.parameters.get('expected_files', []):

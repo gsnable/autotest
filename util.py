@@ -1,5 +1,5 @@
 import  sys, re, subprocess
-from cse.course_configuration import course_configuration
+from course_configuration import course_configuration
 
 # return a pair of hashes
 # 1 mapping labs to a list of tutors

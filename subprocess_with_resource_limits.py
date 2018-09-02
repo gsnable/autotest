@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.5
+#!/usr/bin/python3
 
 #
 # Recent versions of Python should allow this code to be rewrritten and much simplified

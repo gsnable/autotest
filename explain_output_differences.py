@@ -1,8 +1,8 @@
-#!/usr/bin/env python3.5
+#!/usr/bin/python3
 
 import difflib
-from  termcolor import colored as termcolor_colored
-from  collections import defaultdict
+from termcolor import colored as termcolor_colored
+from collections import defaultdict
 
 def explain_output_differences(name, expected, canonical_expected, canonical_expected_plus_newlines, actual, canonical_actual, canonical_actual_plus_newlines, show_expected=True, show_actual=True, show_diff=True, max_lines_shown=32, max_line_length_shown=1024, colorize=False, debug=False, **extra_kwargs):
     colored = termcolor_colored if colorize else lambda x,*a,**kw: x
@@ -40,7 +40,7 @@ def explain_output_differences(name, expected, canonical_expected, canonical_exp
             , 'red')
         if show_actual:
             explanation += "Your program produced these %d lines of %s:\n" % (n_actual_lines, name)
-            explanation += sanitize_string(actual, max_lines_shown=max_lines_shown,max_line_length_shown=max_line_length_shown, line_color= defaultdict(lambda:'red'))
+            explanation += sanitize_string(actual, max_lines_shown=max_lines_shown,max_line_length_shown=max_line_length_shown, line_color= defaultdict(lambda:'red' if colorize else ''))
         return explanation
     if len(canonical_expected_lines) == len(canonical_actual_lines) and 2 < len(canonical_actual_lines) < 1000 and sorted(canonical_expected_lines) == sorted(canonical_actual_lines):
         explanation += colored("\nYour program produced the correct %s lines but in the wrong order.\n" % name, 'red')
